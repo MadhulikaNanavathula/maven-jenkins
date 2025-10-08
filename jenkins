@@ -1,9 +1,17 @@
 pipeline {
   agent any
+
+  tools {
+    maven 'Maven3' // use the name you gave in Tool Configuration
+  }
+
   stages {
     stage('Checkout') {
-      steps { checkout scm }
+      steps {
+        checkout scm
+      }
     }
+
     stage('Build & Test') {
       steps {
         script {
@@ -17,6 +25,7 @@ pipeline {
         }
       }
     }
+
     stage('Archive') {
       steps {
         junit 'target/surefire-reports/*.xml'
